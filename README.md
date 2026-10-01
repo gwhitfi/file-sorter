@@ -5,36 +5,40 @@ preview the file, then send it to one of up to five destination folders, delete 
 
 Native C++ / Win32 with no runtime dependencies: a single `FileSorter.exe`.
 
+## How it was built
+
+File Sorter was built with Claude Code. I came up with the idea and design, defined the features and UX, directed the implementation, and tested it on Windows 10/11 hardware. Any future development of this project will be with AI assistance. As of now, there are no plans for further development.
+
 ## Using it
 
-| Area | What it does |
-| --- | --- |
-| **Folder to sort** (top left) | *Browse…* (Ctrl+O), type or paste a path and press Enter, or drop a folder onto the window. Shows file count, total size and how many files are hidden/system. |
-| **Files** (bottom left) | Every file in the folder, **including hidden and system files** (shown dimmed). Name, Type and Size are always shown; *Columns* adds Date modified/created/accessed, Extension and Attributes. Click a header to sort. |
-| **Preview** (top right) | Previews the selected file. The first file is selected automatically, and after each move/delete the next file is selected. *Open* (or Enter / double-click) opens it in its default app. |
-| **Sort to** (bottom right) | Five destination buttons. Click an empty one to name it and pick its folder; click the pencil (or right-click) to edit or remove it. Clicking a configured button **moves** the file there, with no copy left behind. |
+| Area                          | What it does                                                                                                                                                                                                           |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Folder to sort** (top left) | _Browse…_ (Ctrl+O), type or paste a path and press Enter, or drop a folder onto the window. Shows file count, total size and how many files are hidden/system.                                                         |
+| **Files** (bottom left)       | Every file in the folder, **including hidden and system files** (shown dimmed). Name, Type and Size are always shown; _Columns_ adds Date modified/created/accessed, Extension and Attributes. Click a header to sort. |
+| **Preview** (top right)       | Previews the selected file. The first file is selected automatically, and after each move/delete the next file is selected. _Open_ (or Enter / double-click) opens it in its default app.                              |
+| **Sort to** (bottom right)    | Five destination buttons. Click an empty one to name it and pick its folder; click the pencil (or right-click) to edit or remove it. Clicking a configured button **moves** the file there, with no copy left behind.  |
 
 ### Keyboard
 
-| Key | Action |
-| --- | --- |
-| `1` – `5` | Move the selected file to destination 1–5 |
-| `Del` | Delete (to the Recycle Bin) |
-| `Shift+Del` | Delete permanently (always asks first) |
-| `Space` | Skip to the next file |
-| `Ctrl+Z` | Undo the last move |
-| `↑` / `↓` | Previous / next file |
-| `Enter` | Open the file in its default app |
-| `Ctrl+O` | Choose a folder |
-| `F5` | Refresh |
-| `Ctrl+T` | Toggle light / dark mode |
+| Key         | Action                                    |
+| ----------- | ----------------------------------------- |
+| `1` – `5`   | Move the selected file to destination 1–5 |
+| `Del`       | Delete (to the Recycle Bin)               |
+| `Shift+Del` | Delete permanently (always asks first)    |
+| `Space`     | Skip to the next file                     |
+| `Ctrl+Z`    | Undo the last move                        |
+| `↑` / `↓`   | Previous / next file                      |
+| `Enter`     | Open the file in its default app          |
+| `Ctrl+O`    | Choose a folder                           |
+| `F5`        | Refresh                                   |
+| `Ctrl+T`    | Toggle light / dark mode                  |
 
 ### Safety details
 
 - Moves never overwrite. If the destination already has a file with that name, the moved file becomes `name (2).ext`, and the status bar says so.
 - Moves across drives run in the background with progress, and the original is removed only after the copy succeeds.
-- *Delete* sends files to the Recycle Bin. *Ask before deleting* is on by default.
-- *Undo* (Ctrl+Z) moves sorted files back, up to the last 100 moves.
+- _Delete_ sends files to the Recycle Bin. _Ask before deleting_ is on by default.
+- _Undo_ (Ctrl+Z) moves sorted files back, up to the last 100 moves.
 
 ### What can be previewed
 
@@ -52,14 +56,14 @@ Native C++ / Win32 with no runtime dependencies: a single `FileSorter.exe`.
 
 Install the **Desktop development with C++** workload (it includes CMake), then either:
 
-- *File → Open → Folder…* on this directory, pick the `x64-Release` configuration, and build; or
-- from a *Developer PowerShell for VS*:
+- _File → Open → Folder…_ on this directory, pick the `x64-Release` configuration, and build; or
+- from a _Developer PowerShell for VS_:
 
-  ```powershell
-  cmake -S . -B build -A x64          # uses the newest Visual Studio found
-  cmake --build build --config Release
-  # -> build\Release\FileSorter.exe
-  ```
+    ```powershell
+    cmake -S . -B build -A x64          # uses the newest Visual Studio found
+    cmake --build build --config Release
+    # -> build\Release\FileSorter.exe
+    ```
 
 The CRT is linked statically, so the resulting `.exe` runs on any Windows 10/11 PC without extra installs.
 
